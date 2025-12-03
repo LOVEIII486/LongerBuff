@@ -1,0 +1,8 @@
+key,value,version,sheet
+Settings_Group_Title,Basic Settings,1.0,Groups
+Settings_Group_Advanced,Advanced & Customization,1.0,Groups
+Setting_BuffDurationMultiplier,Buff Duration Multiplier,1.0,BasicSettings
+Setting_AllowBuffStack,Allow Duration Stacking,1.0,BasicSettings
+Setting_CustomExtendedBuffIds,Custom Buff IDs (Comma separated),1.0,AdvancedSettings
+Setting_ExportDesc,Export all known buff data to CSV (Game Root Folder),1.0,AdvancedSettings
+Setting_ExportBtnText,Export Database,1.0,AdvancedSettings
