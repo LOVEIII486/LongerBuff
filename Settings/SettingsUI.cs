@@ -47,7 +47,7 @@ namespace LongerBuff.Settings
                 LongerBuffConfig.Key_CustomExtendedBuffIds,
                 LocalizationManager.GetText("Setting_CustomExtendedBuffIds"),
                 LongerBuffConfig.CustomExtendedBuffIds,
-                200, 
+                1000, 
                 (value) =>
                 {
                     LongerBuffConfig.CustomExtendedBuffIds = value;
