@@ -26,6 +26,15 @@ namespace LongerBuff.Settings
                 1, 5
             );
             ModSettingAPI.AddToggle(
+                LongerBuffConfig.Key_EnableInfiniteDuration,
+                LocalizationManager.GetText("Setting_EnableInfiniteDuration"),
+                LongerBuffConfig.EnableInfiniteDuration,
+                (value) =>
+                {
+                    LongerBuffConfig.EnableInfiniteDuration = value;
+                }
+            );
+            ModSettingAPI.AddToggle(
                 LongerBuffConfig.Key_AllowBuffStack,
                 LocalizationManager.GetText("Setting_AllowBuffStack"),
                 LongerBuffConfig.AllowBuffStack,
@@ -62,7 +71,8 @@ namespace LongerBuff.Settings
                 new List<string> 
                 { 
                     LongerBuffConfig.Key_BuffDurationMultiplier,
-                    LongerBuffConfig.Key_AllowBuffStack
+                    LongerBuffConfig.Key_EnableInfiniteDuration,
+                    LongerBuffConfig.Key_AllowBuffStack,
                 },
                 0.8f, true, true
             );

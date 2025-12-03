@@ -13,15 +13,19 @@ namespace LongerBuff.Settings
         public const string Key_AllowBuffStack = "AllowBuffStack";
         // 自定义ID列表的Key
         public const string Key_CustomExtendedBuffIds = "CustomExtendedBuffIds";
+        public const string Key_EnableInfiniteDuration = "EnableInfiniteDuration";
+        
         
         private const float Default_BuffMultiplier = 1.0f;
         private const bool Default_AllowStack = true;
+        private const bool Default_InfiniteDuration = false;
         
         
         public const float MaxBuffDuration = 86400f; 
         
         private static float _buffDurationMultiplier = Default_BuffMultiplier;
         private static bool _allowBuffStack = Default_AllowStack;
+        private static bool _enableInfiniteDuration = Default_InfiniteDuration;
 
         // 用户自定义白名单 ID 字符串
         public static string CustomExtendedBuffIds = ""; 
@@ -62,6 +66,19 @@ namespace LongerBuff.Settings
             }
         }
         
+        public static bool EnableInfiniteDuration
+        {
+            get => _enableInfiniteDuration;
+            set
+            {
+                if (_enableInfiniteDuration != value)
+                {
+                    _enableInfiniteDuration = value;
+                    OnConfigChanged?.Invoke();
+                }
+            }
+        }
+        
         public static void Load()
         {
             if (ModSettingAPI.GetSavedValue(Key_BuffDurationMultiplier, out float savedMulti))
@@ -72,6 +89,11 @@ namespace LongerBuff.Settings
             if (ModSettingAPI.GetSavedValue(Key_AllowBuffStack, out bool savedStack))
             {
                 _allowBuffStack = savedStack;
+            }
+            
+            if (ModSettingAPI.GetSavedValue(Key_EnableInfiniteDuration, out bool savedInfinite))
+            {
+                _enableInfiniteDuration = savedInfinite;
             }
             
             if (ModSettingAPI.GetSavedValue(Key_CustomExtendedBuffIds, out string savedIds))

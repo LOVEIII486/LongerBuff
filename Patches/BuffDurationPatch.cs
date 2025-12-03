@@ -69,24 +69,30 @@ namespace LongerBuff.Patches
             }
             ref float lifeTimeField = ref TotalLifeTimeRef(targetBuff);
             
-            // 始终基于Prefab原始值，防止指数爆炸
-            float singleShotDuration = buffPrefab.TotalLifeTime * LongerBuffConfig.BuffDurationMultiplier;
-            
-            float finalTime;
 
-            if (LongerBuffConfig.AllowBuffStack)
+            float finalTime;
+            
+            if (LongerBuffConfig.EnableInfiniteDuration)
             {
-                // 叠加模式：
-                // 新时间 = 加Buff前的旧时间 + 这一针的标准时长
-                finalTime = __state + singleShotDuration;
+                // 如果开启了无限模式，直接设为最大值86400秒
+                // 无视叠加规则，直接拉满
+                finalTime = LongerBuffConfig.MaxBuffDuration;
             }
             else
             {
-                // 刷新模式：
-                // 新时间 = 这一针的标准时长，丢弃旧时间
-                finalTime = singleShotDuration;
+                // 原有的逻辑：计算倍率和叠加
+                float singleShotDuration = buffPrefab.TotalLifeTime * LongerBuffConfig.BuffDurationMultiplier;
+                
+                if (LongerBuffConfig.AllowBuffStack)
+                {
+                    finalTime = __state + singleShotDuration;
+                }
+                else
+                {
+                    finalTime = singleShotDuration;
+                }
             }
-            
+
             finalTime = Mathf.Min(finalTime, LongerBuffConfig.MaxBuffDuration);
             lifeTimeField = finalTime;
             
