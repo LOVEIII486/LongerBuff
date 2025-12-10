@@ -13,6 +13,7 @@ namespace LongerBuff.Settings
         public const string Key_AllowBuffStack = "AllowBuffStack";
         // 自定义ID列表的Key
         public const string Key_CustomExtendedBuffIds = "CustomExtendedBuffIds";
+        public const string Key_CustomBlacklistBuffIds = "CustomBlacklistBuffIds";
         public const string Key_EnableInfiniteDuration = "EnableInfiniteDuration";
         
         
@@ -29,8 +30,11 @@ namespace LongerBuff.Settings
 
         // 用户自定义白名单 ID 字符串
         public static string CustomExtendedBuffIds = ""; 
+        // 黑名单
+        public static string CustomBlacklistBuffIds = "";
         
         private static HashSet<int> _cachedCustomIds;
+        private static HashSet<int> _cachedBlacklistIds;
 
         public static event Action OnConfigChanged;
 
@@ -101,6 +105,10 @@ namespace LongerBuff.Settings
                 CustomExtendedBuffIds = savedIds;
                 ClearCache(); // 读取新值后清理缓存
             }
+            if (ModSettingAPI.GetSavedValue(Key_CustomBlacklistBuffIds, out string savedBlacklist))
+            {
+                CustomBlacklistBuffIds = savedBlacklist;
+            }
         }
         
         /// <summary>
@@ -124,6 +132,29 @@ namespace LongerBuff.Settings
                 }
             }
             return _cachedCustomIds;
+        }
+        
+        /// <summary>
+        /// 获取用户自定义的黑名单 ID 集合
+        /// </summary>
+        public static HashSet<int> GetCustomBlacklistIds()
+        {
+            if (_cachedBlacklistIds != null) return _cachedBlacklistIds;
+
+            _cachedBlacklistIds = new HashSet<int>();
+            
+            if (string.IsNullOrWhiteSpace(CustomBlacklistBuffIds)) 
+                return _cachedBlacklistIds;
+            
+            var ids = CustomBlacklistBuffIds.Split(new[] { ',', ' ', '，', ';' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var idStr in ids)
+            {
+                if (int.TryParse(idStr, out int id))
+                {
+                    _cachedBlacklistIds.Add(id);
+                }
+            }
+            return _cachedBlacklistIds;
         }
         
         public static void ClearCache()

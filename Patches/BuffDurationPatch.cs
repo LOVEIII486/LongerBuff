@@ -106,7 +106,12 @@ namespace LongerBuff.Patches
         private static bool CheckAndRegisterBuff(Buff runtimeBuff, Buff prefabBuff)
         {
             int buffId = runtimeBuff.ID;
-
+            
+            if (LongerBuffConfig.GetCustomBlacklistIds().Contains(buffId))
+            {
+                return false;
+            }
+            
             if (KnownBuffDatabase.TryGetBuff(buffId, out var info))
             {
                 if (info.AllowExtension) return true;

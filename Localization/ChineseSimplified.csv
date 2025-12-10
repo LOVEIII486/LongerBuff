@@ -1,9 +1,10 @@
 key,value,version,sheet
 Settings_Group_Title,Buff基础设置,1.0,Groups
-Settings_Group_Advanced,高级与自定义,1.0,Groups
+Settings_Group_Advanced,高级与自定义（需要重启）,1.0,Groups
 Setting_BuffDurationMultiplier,Buff延长时间倍率,1.0,BasicSettings
 Setting_AllowBuffStack,允许时长叠加,1.0,BasicSettings
 Setting_CustomExtendedBuffIds,自定义Buff ID白名单(逗号分隔),1.0,AdvancedSettings
 Setting_ExportDesc,将所有Buff数据导出到游戏根目录(需获得一次才有记录),1.0,AdvancedSettings
 Setting_ExportBtnText,导出 Buff 数据库,1.0,AdvancedSettings
 Setting_EnableInfiniteDuration,开启无限Buff时长,1.0,BasicSettings
+Setting_CustomBlacklistBuffIds,黑名单 Buff ID (逗号分隔，优先级最高),1.0,AdvancedSettings

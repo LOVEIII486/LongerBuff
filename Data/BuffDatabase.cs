@@ -44,11 +44,10 @@ namespace LongerBuff.Data
         }
 
         /// <summary>
-        /// 更新数值 (用于从游戏运行时数据同步)
+        /// 更新数值
         /// </summary>
         public void UpdateRuntimeValues(float newDuration, int newMaxStack, string newExclusionTag)
         {
-            // 只有当数值真的改变时才更新，避免无意义的操作
             if (!Mathf.Approximately(Duration, newDuration) || MaxStack != newMaxStack)
             {
                 // Debug.Log($"[LongerBuff] 同步 Buff ID:{Id} ({DisplayName}) - 时长: {Duration}->{newDuration}, 层数: {MaxStack}->{newMaxStack}");

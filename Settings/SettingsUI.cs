@@ -54,6 +54,17 @@ namespace LongerBuff.Settings
                     LongerBuffConfig.ClearCache();
                 }
             );
+            ModSettingAPI.AddInput(
+                LongerBuffConfig.Key_CustomBlacklistBuffIds,
+                LocalizationManager.GetText("Setting_CustomBlacklistBuffIds"),
+                LongerBuffConfig.CustomBlacklistBuffIds,
+                1000, 
+                (value) =>
+                {
+                    LongerBuffConfig.CustomBlacklistBuffIds = value;
+                    LongerBuffConfig.ClearCache();
+                }
+            );
             ModSettingAPI.AddButton(
                 "Btn_ExportDatabase", 
                 LocalizationManager.GetText("Setting_ExportDesc"), 
@@ -84,6 +95,7 @@ namespace LongerBuff.Settings
                 new List<string> 
                 { 
                     LongerBuffConfig.Key_CustomExtendedBuffIds,
+                    LongerBuffConfig.Key_CustomBlacklistBuffIds,
                     "Btn_ExportDatabase"
                 },
                 0.8f, false, false
